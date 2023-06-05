@@ -61,4 +61,11 @@ let Auth = {
     }
 }
 
-export  { Auth }
+let cityData = {
+    async sendData(city_data){
+        let postData = await Service.post('/city', city_data);
+        return postData
+    }
+}
+
+export  { Auth, cityData }

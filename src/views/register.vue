@@ -35,22 +35,20 @@ export default {
             shortPass:null,
             name:'',
             email:'',
-            password:'',
-            username:''
+            password:''
         }
     },
     methods: {
         async registerUser(){
-            if (this.name=='' || this.email=='' || this.password=='' || this.username==''){
+            if (this.name=='' || this.email=='' || this.password==''){
                 this.emptyMess=true
             }
-            if(this.password.length <6){
+            if(this.password.length < 6){
                 this.shortPass=true;
             }
         else{
             let userData = {
                 name:this.name,
-                username:this.username,
                 email:this.email, 
                 password:this.password,
             }
@@ -63,7 +61,8 @@ export default {
             });
             }
         },
-    }
+    },
+    
 }
 </script>
 
