@@ -3,7 +3,7 @@
     <br><br><br><br><br><br><br><br><br><br><br><br>
             <div class="wrap">
                 <div class="search">
-                    <input type="text" class="searchTerm" placeholder="Where do you wish to travel?">
+                    <input type="text" class="searchTerm" placeholder="Koji grad želiš posjetiti?">
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
@@ -13,126 +13,25 @@
             
             <span class="category-name"></span> <br/><br/>
             <ul style="margin-top:50px">
-                <li>
+                <li v-for="(gradovi) in gradovi" :key="gradovi.id">
                     <div class="img-card iCard-style1">
                         <div class="card-content">
                             <div class="card-image">
-                                <span class="card-title">Cloud Beauty</span>
-                                <img src="https://www.dropbox.com/s/u330jm6faybxrvb/fog-3461451_640.jpg?raw=1"/>
+                                <span class="card-title">{{ gradovi.grad }}</span>
+                                <img :src="gradovi.slika">
                             </div>
                             
                             <div class="card-text">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Image by <a href="https://pixabay.com/users/Hans-2/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3461451" style="color:#795548">Hans Braxmeier</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3461451" style="color:#795548">Pixabay</a>
-                                </p>
+                                <p>{{ gradovi.opis_grada }}</p>
                             </div>
                             
                         </div>
                         
                         <div class="card-link">
-                            <a href="#" title="Read Full"><span>Read Full</span></a>
+                            <a href="#" title="Read Full"><span>Više o gradu...</span></a>
                         </div>
                     </div>                    
                 </li>
-                
-                <li>
-                    <div class="img-card iCard-style2">
-                        <div class="card-content">
-                            <div class="card-image">
-                                <span class="card-caption">Image Caption</span>
-                                <img src="https://www.dropbox.com/s/63v40eqeq9lgz3k/bald-eagle-2715461_640.jpg?raw=1"/>
-                            </div>
-                            
-                            <span class="card-title">Card Title</span>
-                            
-                            <div class="card-text">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Image by <a href="https://pixabay.com/users/moonzigg-6341937/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2715461" style="text-decoration: none">moonzigg</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2715461" style="text-decoration: none">Pixabay</a>
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="card-link">
-                            <a href="#" title="Read Full"><span>Read Full</span></a>
-                        </div>
-                    </div>                    
-                </li>
-                
-                <li>
-                    <div class="img-card iCard-style3">
-                        <div class="card-content">
-                            <div class="card-image">
-                                <span class="card-title">World Map</span>
-                                <img src="https://www.dropbox.com/s/tclqbz7o4u8e705/ipad-632394_640.jpg?raw=1"/>
-                            </div>
-                            
-                            <div class="card-text">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Image by <a href="https://pixabay.com/users/FirmBee-663163/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">William  Iven</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">Pixabay</a>
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="card-link">
-                            <a href="#" title="Read Full">
-                                <span>Go To Link</span>
-                            </a>
-                        </div>
-                    </div>                    
-                </li>
-
-                <li>
-                    <div class="img-card iCard-style3">
-                        <div class="card-content">
-                            <div class="card-image">
-                                <span class="card-title">World Map</span>
-                                <img src="https://media.cnn.com/api/v1/images/stellar/prod/230324090551-01-visiting-france-during-protests-what-to-know-top.jpg?c=16x9&q=h_720,w_1280,c_fill"/>
-                            </div>
-                            
-                            <div class="card-text">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Image by <a href="https://pixabay.com/users/FirmBee-663163/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">William  Iven</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">Pixabay</a>
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="card-link">
-                            <a href="#" title="Read Full">
-                                <span>Go To Link</span>
-                            </a>
-                        </div>
-                    </div>                    
-                </li>
-                
-    
-                
-                <li>
-                    <div class="img-card iCard-style3">
-                        <div class="card-content">
-                            <div class="card-image">
-                                <span class="card-title">World Map</span>
-                                <img src="https://media.cnn.com/api/v1/images/stellar/prod/230324090551-01-visiting-france-during-protests-what-to-know-top.jpg?c=16x9&q=h_720,w_1280,c_fill"/>
-                            </div>
-                            
-                            <div class="card-text">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Image by <a href="https://pixabay.com/users/FirmBee-663163/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">William  Iven</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=632394" style="text-decoration:none">Pixabay</a>
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="card-link">
-                            <a href="#" title="Read Full">
-                                <span>Go To Link</span>
-                            </a>
-                        </div>
-                    </div>                    
-                </li>
-                
             </ul>
 
         </div>
@@ -142,11 +41,18 @@
 </template>
 
 <script>
-
+import { cityData } from '@/service/index.js';
 export default {
   name: 'Home',
-    components: {
-	},
+  data:function(){
+    return{
+      gradovi:[],
+    }
+  },
+  async created(){
+    this.gradovi = await cityData.getData();
+    console.log(this.gradovi)
+  }
 }
 </script>
 <style scoped>

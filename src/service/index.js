@@ -65,7 +65,25 @@ let cityData = {
     async sendData(city_data){
         let postData = await Service.post('/city', city_data);
         return postData
-    }
+    },
+    async getData(){
+            let response = await Service.get('/cities');
+            console.log("Odgovor s backenda: ",response);
+            let data = response.data;
+            
+            data=data.map((doc)=>{
+            return {
+                id: doc._id,
+                grad: doc.grad,
+                slika: doc.slika,
+                opis_grada: doc.opis_grada,
+                regija: doc.regija,
+                zupanija: doc.zupanija
+            }    
+            });
+            console.log("Podaci su ovdje: ",data);
+            return data;
+            }
 }
 
 export  { Auth, cityData }
