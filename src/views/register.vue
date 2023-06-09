@@ -3,12 +3,6 @@
     <div class="container">
         <form>
           <br><br><br><br><br><br><br><br><br><br><br>
-        <p class="errorMsg" v-if="emptyMess">Enter all the data!</p>
-        <p class="errorMsg" v-if="shortPass">Too short password!</p>
-        <!--<div class="form-outline mb-4">
-            <input v-model="repeat_password" type="password" id="registerRepeatPassword" class="form-control" />
-            <label class="form-label" for="registerRepeatPassword">Repeat password</label>
-        </div>-->
         <div class="login-page">
   <div class="form">
         <form class="login-form">
@@ -16,6 +10,8 @@
         <input v-model="email" type="text" placeholder="email address"/>
         <input v-model="password" type="password" placeholder="password"/>
         <button @click.prevent="registerUser()">Sign up</button>
+        <p class="errorMsg" v-if="emptyMess">Molimo, unesite sve podatke!</p>
+        <p class="errorMsg" v-if="shortPass">Prekratka lozinka!</p>
         </form>
         </div>
     </div>

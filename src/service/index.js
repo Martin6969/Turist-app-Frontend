@@ -20,11 +20,11 @@ Service.interceptors.response.use(
 
 let Auth = {
     async signUp(userData) {
-        let post = await Service.post('/user', userData);
+        let post = await Service.post('/korisnik', userData);
         return post
     },
     async login(email, password){
-        let response = await Service.post("/login",{
+        let response = await Service.post("/prijava",{
            email: email,
            password: password
         });
@@ -63,11 +63,11 @@ let Auth = {
 
 let cityData = {
     async sendData(city_data){
-        let postData = await Service.post('/city', city_data);
+        let postData = await Service.post('/grad', city_data);
         return postData
     },
     async getData(){
-            let response = await Service.get('/cities');
+            let response = await Service.get('/gradovi');
             console.log("Odgovor s backenda: ",response);
             let data = response.data;
             
@@ -83,7 +83,23 @@ let cityData = {
             });
             console.log("Podaci su ovdje: ",data);
             return data;
-            }
+    },
+    async dataCategory(zupanija){
+
+        let response = await Service.get(`/gradovi/${zupanija}`);
+        let doc = response.data;
+        doc = doc.map((doc)=>{
+        console.log(doc);
+        return {
+            grad: doc.grad,
+            slika: doc.slika,
+            opis_grada: doc.opis_grada,
+            regija: doc.regija,
+            zupanija: doc.zupanija
+        }
+        });
+        return doc;
+    },
 }
 
 export  { Auth, cityData }

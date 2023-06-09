@@ -9,11 +9,33 @@
                     </button>
                 </div>
                 </div>
+                <div class="filter-wrapper">
+                    <h3>Županija</h3>
+                    
+                    <div class="filter-section">
+                        <select @change="RazvrstajPoZupaniji($event.target.value)" class="select-regija">
+                            <option selected>Sve županije</option>
+                            <option v-for="grad in uniqueGradovi" :key="grad._id" :value="grad.zupanija">{{ grad.zupanija }}</option>
+                        </select>
+                    </div>
+                    
+                    
+                    <!--<button class="primijeni-filter" type="button">Traži</button>-->
+                </div>
+                <!--<div class="filter-section">
+                        <label for="regija">Regija:</label>
+                        <select class="select-regija">
+                        <option value="">Sve regije</option>
+                        <option value="sjeverna">Sjeverna</option>
+                        <option value="sredisnja">Središnja</option>
+                        <option value="jadranska">Jadranska</option>
+                        </select>
+                    </div>-->
     <div class="card-category-2">
             
             <span class="category-name"></span> <br/><br/>
             <ul style="margin-top:50px">
-                <li v-for="(gradovi) in gradovi" :key="gradovi.id">
+                <li v-for="gradovi in filterGradova" :key="gradovi.id">
                     <div class="img-card iCard-style1">
                         <div class="card-content">
                             <div class="card-image">
@@ -27,9 +49,9 @@
                             
                         </div>
                         
-                        <div class="card-link">
+                        <!--<div class="card-link">
                             <a href="#" title="Read Full"><span>Više o gradu...</span></a>
-                        </div>
+                        </div>-->
                     </div>                    
                 </li>
             </ul>
@@ -47,11 +69,41 @@ export default {
   data:function(){
     return{
       gradovi:[],
+      uniqueGradovi:[],
+      filterGradova:[],
     }
+  },
+  methods: {
+        async RazvrstajPoZupaniji(zupanija) {
+            if (zupanija === "Sve županije") {
+                this.filterGradova = await cityData.getData();
+            }
+            else{
+                this.filterGradova = await cityData.dataCategory(zupanija);
+                return this.filterGradova;
+            }
+    },
+  },
+  watch: {
+    gradovi: {
+    handler: function(newGradovi) {
+      const uniqueZupanije = [...new Set(newGradovi.map(grad => grad.zupanija))];
+      this.uniqueGradovi = uniqueZupanije.map(zupanija => {
+        console.log("newGradovi: ", newGradovi)
+        return newGradovi.find(grad => grad.zupanija === zupanija);
+      });
+    },
+    immediate: true
+  }
   },
   async created(){
     this.gradovi = await cityData.getData();
     console.log(this.gradovi)
+
+    this.filterGradova = this.gradovi;
+
+    this.prikazZupanija = Array.from(new Set(this.gradovi.map(grad => grad.zupanija)));
+    console.log("filtrirani: ",this.prikazZupanija[0]);
   }
 }
 </script>
@@ -105,7 +157,7 @@ body {
     
 .card-category-2 ul li, .card-category-3 ul li, .card-category-4 ul li, .card-category-5 ul li, .card-category-6 ul li {
     list-style-type: none;
-    display: inline-block;
+    display: block;
     vertical-align: top;
 }
 
@@ -258,7 +310,7 @@ body {
 
     /* Image Card */
     .img-card {
-        width:300px;
+        width:800px;
         position: relative;
         border-radius: 5px;
         text-align: left;
@@ -337,7 +389,7 @@ body {
             top: 10px;
             left: 10px;
             font-size: 30px;
-            color: #fff;
+            color: black;
         }
         
         .img-card.iCard-style1 .card-text {            
@@ -1416,4 +1468,48 @@ body {
 }
 
 /*Resize the wrap to see the search bar change!*/
+
+.filter-wrapper {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.filter-section {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+.checkbox-container {
+  margin-bottom: 5px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.select-regija {
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.primijeni-filter {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.primijeni-filter:hover {
+  background-color: #45a049;
+}
+
 </style>

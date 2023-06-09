@@ -20,7 +20,7 @@
 						<textarea v-model="opis_grada" name="text" id="city" rows="7" cols="4"></textarea>
 				</div>
 
-                <div class="line">
+                <!--<div class="line">
                     <div class="selectdiv">
                         <label>
                             <select v-model="regija">
@@ -31,7 +31,7 @@
                             </select>
                         </label>
                     </div>
-                </div>
+                </div>-->
                 <div class="line">
                     <div class="selectdiv">
                         <label>
@@ -57,7 +57,7 @@
                         </label>
                     </div>
                 </div>
-
+                <br><br><br><br><br><p v-if="poruka===true" style="color:red;font-size:17px">Popunite sve podatke!</p>
 				<div class="line">
 						<input @click.prevent="send_city()" type="submit" name="submit" value="Pošalji" class="button">
 				</div>
@@ -77,10 +77,16 @@ export default {
       opis_grada:'',
       regija:'',
       zupanija:'',
+      poruka:false
     }
   },
   methods: {
     async send_city(){
+      if(this.grad=="" || this.slika=="" || this.opis_grada=="" || this.regija=="" || this.zupanija==""){
+        this.poruka = true;
+      }
+      else
+      {
         let city_data = {
             grad:this.grad,
             slika:this.slika,
@@ -90,6 +96,8 @@ export default {
         }
         console.log(city_data)
         await cityData.sendData(city_data)
+        this.$router.push({path:'/'});
+      }
     }
   }
 }

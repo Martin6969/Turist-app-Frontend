@@ -22,6 +22,7 @@
                     <div class="navbar-nav ml-auto py-0">
                         <p v-if="auth.userEmail" class="userDisplay">Pozdrav, {{auth.userEmail}}!</p>
                         <router-link to="/" class="nav-item nav-link">Početna</router-link>
+                        <router-link to="/city" v-if="auth.userEmail" class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab">Dodajte grad</router-link>
                         <router-link to="/about" class="nav-item nav-link">O nama</router-link>
                         <router-link v-if="!auth.userEmail" to="/login" class="nav-link" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab">Prijava</router-link>
                         <router-link v-if="!auth.userEmail" to="/register" class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab">Registracija</router-link>
