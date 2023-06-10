@@ -40,6 +40,7 @@
                         <div class="card-content">
                             <div class="card-image">
                                 <span class="card-title">{{ gradovi.grad }}</span>
+                                <span id="heart-third" class="heart"><i @click="wishList(gradovi.grad,gradovi.slika,gradovi.opis_grada)" class="fas fa-heart"></i></span>
                                 <img :src="gradovi.slika">
                             </div>
                             
@@ -63,7 +64,8 @@
 </template>
 
 <script>
-import { cityData } from '@/service/index.js';
+import { Auth, cityData } from '@/service/index.js';
+//import store from '@/store.js'
 export default {
   name: 'Home',
   data:function(){
@@ -71,6 +73,7 @@ export default {
       gradovi:[],
       uniqueGradovi:[],
       filterGradova:[],
+      auth: Auth.state,
     }
   },
   methods: {
@@ -83,6 +86,15 @@ export default {
                 return this.filterGradova;
             }
     },
+    async wishList(grad,slika,opis){
+        let city_wishlist = {
+            grad:grad,
+            slika:slika,
+            opis:opis,
+            korisnik:this.auth.userEmail
+        }
+        await cityData.sendWishList(city_wishlist)
+    }
   },
   watch: {
     gradovi: {
@@ -104,6 +116,7 @@ export default {
 
     this.prikazZupanija = Array.from(new Set(this.gradovi.map(grad => grad.zupanija)));
     console.log("filtrirani: ",this.prikazZupanija[0]);
+
   }
 }
 </script>
@@ -1510,6 +1523,33 @@ input[type="checkbox"] {
 
 .primijeni-filter:hover {
   background-color: #45a049;
+}
+
+.heart{
+  color: #989898;
+  margin-top: 15px;
+  margin-left: 751px;
+  font-size: 30px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  padding: 0px;
+  text-align: center;
+  z-index:1;
+}
+
+.heart-active{
+  color: #C50707;
+}
+
+.heart:hover{
+  color: red;
+  background-color: #f9f9f9;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease-in-out;
 }
 
 </style>

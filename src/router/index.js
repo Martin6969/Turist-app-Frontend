@@ -4,6 +4,7 @@ import Login from '../views/login.vue'
 import Register from '../views/register.vue'
 import About from '../views/about.vue'
 import City from '../views/city.vue'
+import Wishlist from '../views/wishlist.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/city',
     name: 'City',
     component: City
+  },
+  {
+    path: '/wishlist',
+    name: 'wishlist',
+    component: Wishlist
   },
 ]
 

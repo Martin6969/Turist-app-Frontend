@@ -100,6 +100,11 @@ let cityData = {
         });
         return doc;
     },
+
+    async sendWishList(city_wishlist){
+        let postWishList = await Service.post('/omiljeni_gradovi', city_wishlist);
+        return postWishList
+    }
 }
 
 export  { Auth, cityData }
