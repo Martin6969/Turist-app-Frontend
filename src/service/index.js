@@ -104,7 +104,29 @@ let cityData = {
     async sendWishList(city_wishlist){
         let postWishList = await Service.post('/omiljeni_gradovi', city_wishlist);
         return postWishList
-    }
+    },
+
+    async getWishList(korisnik){
+
+        let response = await Service.get(`/omiljeni_gradovi/${korisnik}`);
+        let doc = response.data;
+        doc = doc.map((doc)=>{
+        console.log(doc);
+        return {
+            id: doc._id,
+            grad: doc.grad,
+            slika: doc.slika,
+            opis: doc.opis,
+            korisnik: doc.korisnik
+        }
+        });
+        return doc;
+    },
+
+    async deleteCity(id){
+        let response = await Service.post(`/omiljeni_gradovi/delete/${id}`);
+        return response;
+    },
 }
 
 export  { Auth, cityData }

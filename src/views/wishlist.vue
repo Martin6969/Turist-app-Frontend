@@ -6,17 +6,17 @@
               
               <span class="category-name"></span> <br/><br/><h1>Gradovi koje želim posjetiti</h1>
               <ul style="margin-top:50px">
-                  <li v-for="gradovi in filterGradova" :key="gradovi.id">
+                  <li v-for="gradovi in gradovi" :key="gradovi.id">
                       <div class="img-card iCard-style1">
                           <div class="card-content">
                               <div class="card-image">
                                   <span class="card-title">{{ gradovi.grad }}</span>
-                                  <span id="heart-third" class="heart"><i onclick="wishList()" class="fas fa-heart"></i></span>
+                                  <span class="trash"><!--<span class="trash_text">Remove from wishlist</span>--><i @click="deleteFromWishlist(gradovi.id)" class="trash_hover fa fa-trash"></i></span>
                                   <img :src="gradovi.slika">
                               </div>
                               
                               <div class="card-text">
-                                  <p>{{ gradovi.opis_grada }}</p>
+                                  <p>{{ gradovi.opis }}</p>
                               </div>
                               
                           </div>
@@ -35,47 +35,24 @@
   </template>
   
   <script>
-  import { cityData } from '@/service/index.js';
+  import { Service, cityData, Auth } from '@/service/index.js';
   export default {
     name: 'Home',
     data:function(){
       return{
         gradovi:[],
-        uniqueGradovi:[],
-        filterGradova:[],
+        auth: Auth.state,
       }
     },
     methods: {
-          async RazvrstajPoZupaniji(zupanija) {
-              if (zupanija === "Sve županije") {
-                  this.filterGradova = await cityData.getData();
-              }
-              else{
-                  this.filterGradova = await cityData.dataCategory(zupanija);
-                  return this.filterGradova;
-              }
-      },
-    },
-    watch: {
-      gradovi: {
-      handler: function(newGradovi) {
-        const uniqueZupanije = [...new Set(newGradovi.map(grad => grad.zupanija))];
-        this.uniqueGradovi = uniqueZupanije.map(zupanija => {
-          console.log("newGradovi: ", newGradovi)
-          return newGradovi.find(grad => grad.zupanija === zupanija);
-        });
-      },
-      immediate: true
-    }
+        async deleteFromWishlist(id){
+            await cityData.deleteCity(id);
+            console.log("id",id)
+            this.$router.go();
+        }
     },
     async created(){
-      this.gradovi = await cityData.getData();
-      console.log(this.gradovi)
-  
-      this.filterGradova = this.gradovi;
-  
-      this.prikazZupanija = Array.from(new Set(this.gradovi.map(grad => grad.zupanija)));
-      console.log("filtrirani: ",this.prikazZupanija[0]);
+        this.gradovi = await cityData.getWishList(this.auth.userEmail);
     }
   }
   </script>
@@ -1510,6 +1487,39 @@
     -o-transition: all 1s ease;
     transition: all 1s ease-in-out;
   }
-  
+  .trash {
+    color: #989898;
+    margin-top: 15px;
+    margin-left: 751px;
+    font-size: 30px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    padding: 0px;
+    text-align: center;
+    z-index:1;
+  }
+  .trash:hover{
+    color: red;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease-in-out;
+  }
+  .trash_text {
+    color: #989898;
+    /* margin-top: 15px; */
+    margin-left: -133px;
+    font-size: 20px;
+    position: absolute;
+    /* width: 40px; */
+    /* height: 40px; */
+    float: left !important;
+    border-radius: 30px;
+    padding: 0px;
+    text-align: left;
+    z-index: 1;
+  }
   </style>
   

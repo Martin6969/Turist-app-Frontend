@@ -2,12 +2,12 @@
   <div class="home">
     <br><br><br><br><br><br><br><br><br><br><br><br>
             <div class="wrap">
-                <div class="search">
+                <!--<div class="search">
                     <input type="text" class="searchTerm" placeholder="Koji grad želiš posjetiti?">
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
                     </button>
-                </div>
+                </div>-->
                 </div>
                 <div class="filter-wrapper">
                     <h3>Županija</h3>

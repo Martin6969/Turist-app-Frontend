@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     async send_city(){
-      if(this.grad=="" || this.slika=="" || this.opis_grada=="" || this.regija=="" || this.zupanija==""){
+      if(this.grad=="" || this.slika=="" || this.opis_grada=="" || this.zupanija==""){
         this.poruka = true;
       }
       else
